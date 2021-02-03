@@ -56,7 +56,7 @@ echo -e "Start Titleextractor \n"
 #------------------------------------------------#
 cat $1-alive-subs.txt|titlextractor -f -c|tee $1-subs-title.txt
 #------------------------------------------------#
-echo -e "[+]Finish All Subdomain Enum for $1 target *$(wc -l "Final-subs.txt")* for None-Alive Subdomains and *$(wc -l "$1-alive-subs.txt")* for alive subdomains  "|notify -discord -discord-webhook-url "https://discord.com/api/webhooks/805562215582138428/JnTsWgeBa7pwlW0tlW9732UaP7LX_YQtpL5-eeRanTRbKXyNunbNtsLYxpj4kX0jj8oh"
+echo -e "[+]Finish All Subdomain Enum for $1 target *$(wc -l "Final-subs.txt")* for None-Alive Subdomains and *$(wc -l "$1-alive-subs.txt")* for alive subdomains  "|notify -discord -discord-webhook-url "https://discord.com/api/webhooks/806494192409903134/ac9LWdRIHGDYFdoWeha_c66KHjipQrb1o7nz-du7aHXBwLx3EBx2aFZLCinhz3LWzjuy"
 #------------------------------------------------#
 echo -e "[+] Start CRLFUZZ [+]"
 #------------------------------------------------#
@@ -69,7 +69,7 @@ mkdir nuclei
 echo -e "[+] Start Nuclei [+]"
 #------------------------------------------------#
 
-nuclei -l $1-alive-subs.txt -t "/root/nuclei-templates/" -silent
+nuclei -l $1-alive-subs.txt -t "/root/nuclei-templates/" -silent -o nuclei/sefo.txt
 #------------------------------------------------#
 echo -e "[+] Nuclei List Directory *$(ls "./nuclei/")* "|notify -discord -discord-webhook-url "https://discord.com/api/webhooks/806494192409903134/ac9LWdRIHGDYFdoWeha_c66KHjipQrb1o7nz-du7aHXBwLx3EBx2aFZLCinhz3LWzjuy"
 #------------------------------------------------#
