@@ -77,3 +77,7 @@ echo -e "[+] Start Waybackurls with KXSS [+]"
 #------------------------------------------------#
 cat $1-alive-subs.txt| waybackurls | grep "https://" | grep -v "png\|jpg\|css\|js\|gif\|txt\|pdf" | grep "=" | qsreplace | qsreplace -a|kxss|tee kxss.txt
 #------------------------------------------------#
+echo -e "Start QuickXSS\n"
+#------------------------------------------------#
+./QuickXSS.sh $1 saad.xss.ht
+#------------------------------------------------#
