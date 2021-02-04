@@ -21,7 +21,7 @@
 #TARGET=$1
 #DIR=$2
 
-[ -z "$1" ] && { printf "\n [+]Please Use recon example.com [+]\n";exit;}
+[ -z "$1" ] && { printf "\n [+]Please Use recon example.com tmm balsh bedan[+]\n";exit;}
 
 #------------------------------------------------#
 echo -e "Start Assetfinder\n"
@@ -69,15 +69,17 @@ mkdir nuclei
 echo -e "[+] Start Nuclei [+]"
 #------------------------------------------------#
 
-nuclei -l $1-alive-subs.txt -t "/root/nuclei-templates/" -silent -o nuclei/sefo.txt
+nuclei -l $1-alive-subs.txt -t "/root/nuclei-templates/cves/*/*.yaml" -o nuclei/cves.txt -silent -c 60
+nuclei -l $1-alive-subs.txt -t "/root/nuclei-templates/exposed-panels/" -o nuclei/exposed-panels.txt -silent
+nuclei -l $1-alive-subs.txt -t "/root/nuclei-templates/exposed-tokens/*/*.yaml" -o nuclei/exposed-tokens.txt -c 60 -silent
+nuclei -l $1-alive-subs.txt -t "/root/nuclei-templates/exposures/*/*.yaml" -o nuclei/exposures.txt -c 60 -silent
+nuclei -l $1-alive-subs.txt -t "/root/nuclei-templates/vulnerabilities/*/*.yaml" -o nuclei/vulnerabilitiess.txt -c 60 -silent
+nuclei -l $1-alive-subs.txt -t "/root/nuclei-templates/misconfiguration/*/*.yaml" -o nuclei/misconfiguration.txt -c 60 -silent
+
 #------------------------------------------------#
 echo -e "[+] Nuclei List Directory *$(ls "./nuclei/")* "|notify -discord -discord-webhook-url "https://discord.com/api/webhooks/806494192409903134/ac9LWdRIHGDYFdoWeha_c66KHjipQrb1o7nz-du7aHXBwLx3EBx2aFZLCinhz3LWzjuy"
 #------------------------------------------------#
 echo -e "[+] Start Waybackurls with KXSS [+]"
 #------------------------------------------------#
 cat $1-alive-subs.txt| waybackurls | grep "https://" | grep -v "png\|jpg\|css\|js\|gif\|txt\|pdf" | grep "=" | qsreplace | qsreplace -a|kxss|tee kxss.txt
-#------------------------------------------------#
-echo -e "Start QuickXSS\n"
-#------------------------------------------------#
-./QuickXSS.sh $1 saad.xss.ht
 #------------------------------------------------#
