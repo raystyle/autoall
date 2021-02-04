@@ -24,7 +24,7 @@ echo -e "\e[1;34m\nFinding URLs for $1 .... \n \e[0m"
 
 echo "$1" | waybackurls | tee $1.txt
 
-echo -e "\e[1;31m\nFinding valid URLs for XSS \n \e[0m"
+echo -e "\e[1;31m\nFinding valid URLs for XSS \n \e[0m" "|notify -discord -discord-webhook-url "https://discord.com/api/webhooks/806494192409903134/ac9LWdRIHGDYFdoWeha_c66KHjipQrb1o7nz-du7aHXBwLx3EBx2aFZLCinhz3LWzjuy"
 
 cat $1.txt | gf xss | sed 's/=.*/=/' | sed 's/URL: //' | tee $1_temp_xss.txt
 
